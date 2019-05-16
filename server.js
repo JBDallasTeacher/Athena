@@ -1,7 +1,20 @@
 var express = require ("express");
 const mongoose = require ("mongoose");
+
+
+
 var app = express();
+
 //const routes = require ("./routes")
+const db = require('./config/keys').MongoURI;
+
+// Connect to Mongo
+mongoose.connect(db, { useNewUrlParser: true})
+.then(() => console.log('MongoDB Connected ..'))
+.catch(err => console.log(err));
+
+
+
 
 const PORT = process.env.PORT || 8080;//HEROKU, LOCAL HOST
 
@@ -15,6 +28,8 @@ if (process.env.NODE_ENV === 'production') {
   
   //CIRCULAR DEPENDENCY TO USE ROUTES
   //app.use(routes);
+  app.use('/', require('./routes/index'));
+  app.use('/users', require('./routes/users'));
   
   //INITIALIZE APP
   app.listen(PORT, function() {
