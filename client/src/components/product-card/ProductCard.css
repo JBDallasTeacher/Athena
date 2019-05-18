@@ -1,0 +1,23 @@
+.photoCards {
+    display: inline-block;
+    /* display: block; */
+    width: auto;
+    height: 100%;
+    /* margin: 10px; */
+    /* margin-left: 40px;
+    margin-right: 40px; */
+    /* place-content:  */
+    /* border-right-style: solid;
+    box-shadow: 2px 4px 5px grey; */
+  }
+  
+  .img-container {
+    margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    /* align-items: center; */
+    /* border-right-style: solid; */
+    border: 4px double black;
+    box-shadow: 2px 4px 5px grey;
+    /* background-color: blue; */
+  }
