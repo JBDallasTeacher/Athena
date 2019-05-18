@@ -2,24 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-/*class NavBar extends Component {
-    render() {
-        return (
-            <ul className="NavList">
-                <li>
-                    <Link exact to="/">TEACHER</Link>
-                </li>
-                <li>
-                    <Link to="/about">STUDENT</Link>
-                </li>
-               
-            </ul>
-        );
-    }
-}
-
-export default NavBar;*/
-
 class Nav extends Component {
     state = {
         open: false,
@@ -65,6 +47,7 @@ class Nav extends Component {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
+                
                 <div className={`${this.state.open ? "" : "collapse "}navbar-collapse`} id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
@@ -73,7 +56,7 @@ class Nav extends Component {
                                 className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}
                                 to="/teacherPanel"
                             >
-                               teacher
+                                teacher
                 </Link>
                         </li>
                         <li className="nav-item">

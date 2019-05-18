@@ -7,7 +7,7 @@ const studentsSchema = new Schema({
   studentClass: { type: String, required: true },
   studentTeacher: { type: String, required: true },
   studentAddress: { type: String, required: false },
-  studentGrade: { type: integer, required: true },
+  studentMissionGrade: { type: integer, required: true },
   studentRole: { type: String, required: true },
 });
 

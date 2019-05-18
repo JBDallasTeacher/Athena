@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import Jumbotron from "../component/Jumbotron";
+
 
 class Home extends Component {
   render() {
@@ -16,5 +16,27 @@ export default Home;
 
 
 
+
+/*import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import App from "..App.js"
+
+
+function App() {
+  return (
+    <Router>
+      <div className="background">
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={home} />
+          <Route exact path="/teacherPanel" component={teacherPanel} />
+          <Route exact path="/student" component={student} />
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+export default App;*/
 
 

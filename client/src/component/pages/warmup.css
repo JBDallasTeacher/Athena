@@ -1,0 +1,13 @@
+
+.background-warmup {
+    background-image: url('/client/src/images/warmupScreen.png'); 
+    
+  /* Full height */
+   height: 100vh;  
+  /* Center and scale the image nicely */
+  
+   /* background-position: center; */
+   width: 100%; 
+   background-repeat: no-repeat; 
+  background-size: cover; 
+  }
