@@ -1,22 +1,22 @@
-<<<<<<< HEAD
 {
-  "name": "mern-auth",
+  "name": "athena",
   "version": "1.0.0",
-  "description": "Mern Auth Example",
+  "description": "athena prototype",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "install": "npm run client-install",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && yarn start",
+    "seed": "node scripts/seedDB.js",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
     "express": "^4.16.4",
     "is-empty": "^1.2.0",
@@ -27,40 +27,3 @@
     "validator": "^10.9.0"
   }
 }
-=======
-{
-  "name": "athena",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "client": "cd client && npm start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JBDallasTeacher/Athena.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JBDallasTeacher/Athena/issues"
-  },
-  "homepage": "https://github.com/JBDallasTeacher/Athena#readme",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.19.0",
-    "concurrently": "^4.1.0",
-    "dotenv": "^8.0.0",
-    "express": "^4.16.4",
-    "if-env": "^1.0.4",
-    "mongoose": "^5.5.7",
-    "morgan": "^1.9.1",
-    "passport": "^0.4.0",
-    "react-bootstrap": "^1.0.0-beta.8",
-    "react-router-dom": "^5.0.0"
-  }
-}
->>>>>>> master
