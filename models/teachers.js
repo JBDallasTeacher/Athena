@@ -5,6 +5,7 @@ const teachersSchema = new Schema({
   teacherID: { type: integer, required: true, unique: true },
   teacherName: { type: String, required: true },
   teacherClass: { type: String, required: true },
+  teacherUsername:  { type: String, required: true },
   teacherPassword: { type: String, required: true },
   teacherSubject: { type: String, required: false },
   teacherGrade: { type: integer, required: true },
