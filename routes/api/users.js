@@ -10,11 +10,15 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 // Load User model
-const User = require("../../controllers/models/User");
+const User = require("../../models/User");
 
 // @route POST api/users/register
 // @desc Register user
 // @access Public
+
+// router.get("/", function(req, res ) {
+//   res.send("ok");
+// });
 router.post("/register", (req, res) => {
   // Form validation
 
