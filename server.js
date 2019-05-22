@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const morgan = require("morgan");
 const app = express();
-const users = require("./routes/api/users");
+// const users = require("./routes/api/users");
+const routes = require('./routes')
 
 //PORT
 const PORT= process.env.PORT || 8080;
@@ -29,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //CIRCULAR DEPENDENCIES
-app.use("/api/users", users);
+app.use(routes);
 
 //INITIZLIZE PASSPORT
 app.use(passport.initialize());
