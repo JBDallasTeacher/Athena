@@ -26,7 +26,10 @@ class StudentForm extends React.Component {
   };
   render() {
     return (
-      <form
+      <div style={{ height: "75vh", marginTop: "70px" }} className="container">
+      <div className="row">
+        <div className="col s12">
+        <form
         onSubmit={this.props.handleSubmit(this.onSubmit)}
         className="ui form error"
       >
@@ -36,10 +39,15 @@ class StudentForm extends React.Component {
         <Field name="password2" component={this.renderInput} label="Confirm Student Password" />
         <Field name="studentID" component={this.renderInput} label="Enter Student ID" />
         <Field name="studentClass" component={this.renderInput} label="Enter Student Class" />
-        <Field name="studentAdress" component={this.renderInput} label="Enter Student Adress" />
+        <Field name="studentAddress" component={this.renderInput} label="Enter Student Adress" />
         <Field name="role" component={this.renderInput} label="Enter Student Role" />
         <button className="ui button primary">Submit</button>
       </form>
+        </div>
+       
+      </div>
+    </div>
+      
     );
   }
 }
