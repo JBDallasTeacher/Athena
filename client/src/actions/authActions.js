@@ -18,6 +18,9 @@ export const registerTeacher = (userData, history) => dispatch => {
     );
 };
 
+
+
+
 // Login - get teacher token
 export const loginTeacher = userData => dispatch => {
   axios
@@ -76,6 +79,8 @@ export const setCurrentUser = decoded => {
     payload: decoded
   };
 };
+
+
 
 // User loading
 export const setUserLoading = () => {

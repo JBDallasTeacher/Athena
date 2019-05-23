@@ -14,22 +14,7 @@ const studentSchema = new Schema({
     type: String,
     required: true
   },
-  teacherID: { 
-    type: String, 
-    required: true, 
-    unique: true 
-  },
-  teacherISDid: { 
-    type: Number, 
-    required: true, 
-    unique: true 
-  },
   studentID: { 
-    type: Number, 
-    required: true, 
-    nique: true 
-  },
-  studentUsername:  { 
     type: String, 
     required: true
   },
@@ -41,13 +26,18 @@ const studentSchema = new Schema({
      type: String, 
      required: false 
     },
-    averageGrade: [
-     {  missionID: {type: String, required: true},
-      averageGrade: { type: String, required: true} }
+  averageGrade: [
+    {  missionID: {type: String, required: false},
+      averageGrade: { type: String, required: false} 
+    }
   ],
   role: { 
     type: String, 
     required: true 
+  },
+  teacherID: { 
+    type: String, 
+    required: true
   },
   date: {
     type: Date,

@@ -28,7 +28,7 @@ router.get("/", function(req,res){
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-
+console.log(req.body)
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
@@ -36,37 +36,57 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  Student.findOne({ email: req.body.email }).then(user => {
-    if (user) {
-      return res.status(400).json({ email: "Email already exists" });
-    } else {
-      const newStudent = new Student({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        teacherID: req.body.teacherID,
-        teacherISDid: req.body.teacherISDid,
-        studentID: req.body.studentID,
-        studentUsername: req.body.studentUsername,
-        studentClass: req.body.studentClass,
-        studentAddress: req.body.studentAddress,
-        averageGrade: req.body.averageGrade,
-        role: req.body.role
-      });
-
-      // Hash password before saving in database
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newStudent.password, salt, (err, hash) => {
-          if (err) throw err;
-          newStudent.password = hash;
-          newStudent
-            .save()
-            .then(student => res.json(student))
-            .catch(err => console.log(err));
-        });
-      });
-    }
+  const newStudent = new Student({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    studentID: req.body.studentID,
+    studentClass: req.body.studentClass,
+    studentAddress: req.body.studentAddress,
+    role: req.body.role,
+    teacherID: req.body.id,
   });
+
+  // Hash password before saving in database
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newStudent.password, salt, (err, hash) => {
+      if (err) throw err;
+      newStudent.password = hash;
+      newStudent
+        .save()
+        .then(student => res.json(student))
+        .catch(err => console.log(err));
+    });
+  });
+  // Student.findOne({ email: req.body.email }).then(student => {
+  //   // if (student) {
+  //   //   return res.status(400).json({ email: "Email already exists" });
+  //   // } else {
+  //     const newStudent = new Student({
+  //       name: req.body.name,
+  //       email: req.body.email,
+  //       password: req.body.password,
+  //       studentID: req.body.studentID,
+  //       studentClass: req.body.studentClass,
+  //       studentAddress: req.body.studentAddress,
+  //       role: req.body.role,
+  //       teacherID: req.body.id,
+  //     });
+
+  //     // Hash password before saving in database
+  //     bcrypt.genSalt(10, (err, salt) => {
+  //       bcrypt.hash(newStudent.password, salt, (err, hash) => {
+  //         if (err) throw err;
+  //         newStudent.password = hash;
+  //         newStudent
+  //           .save()
+  //           .then(student => res.json(student))
+  //           .catch(err => console.log(err));
+  //       });
+  //     });
+  //   }
+  
+  //   );
 });
 
 // @route POST api/users/login

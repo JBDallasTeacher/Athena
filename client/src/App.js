@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
+import history from './history';
 
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -14,7 +15,9 @@ import Login from "./components/auth/Login";
 import LoginStudents from "./components/auth/LoginStudents";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import TeacherDashboard from "./components/dashboard/TeacherDashboard"
 import Home from "./components/home/Home"
+import StudentCreate from './components/teacher/StudentCreate'
 
 import "./App.css";
 import ProductList from "./components/product-list/ProductList";
@@ -42,7 +45,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Landing} />
@@ -52,7 +55,9 @@ class App extends Component {
             <Route exact path="/products" component={ProductList} />
             <Route exact path="/products/:id" component={ProductDetails} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />\
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/tdashboard" component={TeacherDashboard} />
+              <PrivateRoute exact path="/tdashboard/new" component={StudentCreate} />\
               <PrivateRoute exact path="/home" component={Home} />
             </Switch>
           </div>
