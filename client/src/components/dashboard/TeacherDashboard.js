@@ -2,20 +2,49 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import {fetchStudents} from "../../actions/studentsActions";
-import {Link} from 'react-router-dom';
+import { fetchStudents } from "../../actions/studentsActions";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
-componentDidMount(){
-this.props.fetchStudents();
-}
+  componentDidMount() {
+    this.props.fetchStudents();
+  }
 
-renderList(){
-    return this.props.students.map(function(student){
-        return <h1>{student.name}</h1>
-})
-    
-}
+  renderAdmin(student) {
+    const { id } = this.props.auth.user;
+    const teacherID = student.teacherID;
+    const _id = student._id;
+    if (teacherID === id) {
+      return (
+        <div className="card">
+          <div className="card-content">
+            <h5 class="card-title">{student.name}</h5>
+            <p>Student Id: {student.studentID}</p>
+            <div className="card-action">
+              <Link
+                to={`/tdashboard/edit/${_id}`}
+                className="btn btn-large waves-effect waves-light hoverable gray accent-3"
+              >
+                Edit
+              </Link>
+              <Link
+                to={`/tdashboard/delete/${_id}`}
+                className="btn btn-large waves-effect waves-light hoverable red accent-3"
+              >
+                Delete
+              </Link>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderList() {
+    return this.props.students.map(student => {
+      return <div>{this.renderAdmin(student)}</div>;
+    });
+  }
 
   onLogoutClick = e => {
     e.preventDefault();
@@ -25,18 +54,17 @@ renderList(){
   render() {
     const { user } = this.props.auth;
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
+      <div style={{ height: "75vh", marginTop: "70px" }} className="container">
         <div className="row">
-{this.renderList()}
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a Athena Page{" "}
-                <span style={{ fontFamily: "monospace" }}>ATHENA</span> app 👏
-              </p>
-            </h4>
-            <Link to='/tdashboard/new'>Register a Student</Link>
+          <div className="col s5">
+            <b>Wellcome  {user.name.split(" ")[0]}</b>
+            <p>You are logged into ATHENA app</p>
+            <Link to="/tdashboard/new" style={{
+                width: "150px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem"
+              }}>Register a Student</Link>
             <button
               style={{
                 width: "150px",
@@ -49,6 +77,10 @@ renderList(){
             >
               Logout
             </button>
+          </div>
+          <div className="col s1"/>
+          <div className="col s6">
+          {this.renderList()}
           </div>
         </div>
       </div>
