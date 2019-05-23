@@ -30,7 +30,7 @@ export const fetchStudents = () => dispatch =>{
     history.push('/tdashboard')
   }
   export const deleteStudent = id => (dispatch) =>{
-    axios.delete(`/api/students/register${id}`).then(res =>
+    axios.delete(`/api/students/${id}`).then(res =>
       dispatch({type: DELETE_STUDENT, payload:id})
     ); 
     history.push('/tdashboard')
