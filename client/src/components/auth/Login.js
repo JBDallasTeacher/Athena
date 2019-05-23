@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
+import { loginTeacher } from "../../actions/authActions";
 import classnames from "classnames";
 
 class Login extends Component {
@@ -46,7 +46,7 @@ class Login extends Component {
       password: this.state.password
     };
 
-    this.props.loginUser(userData);
+    this.props.loginTeacher(userData);
   };
 
   render() {
@@ -138,5 +138,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginTeacher }
 )(Login);
