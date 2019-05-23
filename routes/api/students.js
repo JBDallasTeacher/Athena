@@ -21,7 +21,15 @@ router.get("/", function(req,res){
     });
 })
 
-
+router.get("/:id", (req, res) =>{
+  Student.findById(req.params.id)
+  .then(function(dbModel) {
+    res.json(dbModel);
+  })
+  .catch(function(err){
+    res.status(422).json(err);
+});
+}),
 
 // @route POST api/users/register
 // @desc Register user
@@ -58,35 +66,6 @@ console.log(req.body)
         .catch(err => console.log(err));
     });
   });
-  // Student.findOne({ email: req.body.email }).then(student => {
-  //   // if (student) {
-  //   //   return res.status(400).json({ email: "Email already exists" });
-  //   // } else {
-  //     const newStudent = new Student({
-  //       name: req.body.name,
-  //       email: req.body.email,
-  //       password: req.body.password,
-  //       studentID: req.body.studentID,
-  //       studentClass: req.body.studentClass,
-  //       studentAddress: req.body.studentAddress,
-  //       role: req.body.role,
-  //       teacherID: req.body.id,
-  //     });
-
-  //     // Hash password before saving in database
-  //     bcrypt.genSalt(10, (err, salt) => {
-  //       bcrypt.hash(newStudent.password, salt, (err, hash) => {
-  //         if (err) throw err;
-  //         newStudent.password = hash;
-  //         newStudent
-  //           .save()
-  //           .then(student => res.json(student))
-  //           .catch(err => console.log(err));
-  //       });
-  //     });
-  //   }
-  
-  //   );
 });
 
 // @route POST api/users/login
