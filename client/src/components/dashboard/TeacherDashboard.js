@@ -18,7 +18,7 @@ class Dashboard extends Component {
       return (
         <div className="card">
           <div className="card-content">
-            <h5 class="card-title">{student.name}</h5>
+            <h5 className="card-title">{student.name}</h5>
             <p>Student Id: {student.studentID}</p>
             <div className="card-action">
               <Link
@@ -42,7 +42,7 @@ class Dashboard extends Component {
 
   renderList() {
     return this.props.students.map(student => {
-      return <div>{this.renderAdmin(student)}</div>;
+      return <div key={student._id}>{this.renderAdmin(student)}</div>;
     });
   }
 
