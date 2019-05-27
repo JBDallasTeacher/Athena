@@ -18,8 +18,7 @@ const missionSchema = new Schema({
  ],
   studentID: { 
     type: String, 
-    required: true, 
-    nique: true 
+    required: false, 
   },
   date: {
     type: Date,

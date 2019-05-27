@@ -16,9 +16,7 @@ const teachersSchema = new Schema({
   },
   teacherID: { 
     type: Number, 
-    required: true, 
-    unique: true 
-  },
+    required: true,   },
   teacherClass: { 
     type: String, 
     required: true 

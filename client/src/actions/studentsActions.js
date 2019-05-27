@@ -5,7 +5,8 @@ import { FETCH_STUDENTS,FETCH_STUDENT, CREATE_STUDENT, EDIT_STUDENT, DELETE_STUD
 export const fetchStudents = () => dispatch =>{
     axios.get('/api/students/').then(res =>
       dispatch({type: FETCH_STUDENTS, payload:res.data})
-    )
+    );
+    history.push('/tdashboard')
   }
 
   export const createStudent = (formValues) => (dispatch, getState) =>{

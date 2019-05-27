@@ -2,8 +2,50 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-
+import { fetchMissions } from "../../actions/missionActions";
+import { Link } from "react-router-dom";
+import Wizardform from '../student/missionsForm/WizardForm'
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.fetchMissions();
+  }
+
+  // renderAdmin(student) {
+  //   const { id } = this.props.auth.user;
+  //   const teacherID = student.teacherID;
+  //   const _id = student._id;
+  //   if (teacherID === id) {
+  //     return (
+  //       <div className="card">
+  //         <div className="card-content">
+  //           <h5 className="card-title">{student.name}</h5>
+  //           <p>Student Id: {student.studentID}</p>
+  //           <div className="card-action">
+  //             <Link
+  //               to={`/tdashboard/edit/${_id}`}
+  //               className="btn btn-large waves-effect waves-light hoverable gray accent-3"
+  //             >
+  //               Edit
+  //             </Link>
+  //             <Link
+  //               to={`/tdashboard/delete/${_id}`}
+  //               className="btn btn-large waves-effect waves-light hoverable red accent-3"
+  //             >
+  //               Delete
+  //             </Link>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
+
+  renderList() {
+    return this.props.missions.map(mission => {
+      return <div key={mission._id}><Wizardform mission={mission}/></div>;
+    });
+  }
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -11,18 +53,18 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
+      <div style={{ height: "75vh", marginTop: "70px" }} className="container">
         <div className="row">
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a Athena Page{" "}
-                <span style={{ fontFamily: "monospace" }}>ATHENA</span> app 👏
-              </p>
-            </h4>
+          <div className="col s5">
+            <b>Wellcome  {user.name.split(" ")[0]}</b>
+            <p>You are logged into ATHENA app</p>
+            <Link to="/tdashboard/new" style={{
+                width: "150px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem"
+              }}>Register a Student</Link>
             <button
               style={{
                 width: "150px",
@@ -36,6 +78,11 @@ class Dashboard extends Component {
               Logout
             </button>
           </div>
+          <div className="col s1"/>
+          <div className="col s6">
+            {/* <Wizardform/> */}
+          {this.renderList()}
+          </div>
         </div>
       </div>
     );
@@ -48,10 +95,11 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  missions: Object.values(state.missions)
 });
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, fetchMissions }
 )(Dashboard);
