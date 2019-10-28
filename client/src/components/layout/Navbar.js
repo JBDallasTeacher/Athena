@@ -14,8 +14,8 @@ class Navbar extends Component {
               }}
               className="col s5 brand-logo center black-text"
             >
-              <i className="material-icons">code</i>
-              Home
+              <i className="material-icons">wifi_tethering</i>
+              DallasISD
             </Link>
           </div>
         </nav>

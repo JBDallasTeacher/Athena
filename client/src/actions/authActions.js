@@ -4,10 +4,11 @@ import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
-// Register User
-export const registerUser = (userData, history) => dispatch => {
+
+// Register Teacher
+export const registerTeacher = (userData, history) => dispatch => {
   axios
-    .post("/api/users/register", userData)
+    .post("/api/teachers/register", userData)
     .then(res => history.push("/login"))
     .catch(err =>
       dispatch({
@@ -17,10 +18,13 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
-// Login - get user token
-export const loginUser = userData => dispatch => {
+
+
+
+// Login - get teacher token
+export const loginTeacher = userData => dispatch => {
   axios
-    .post("/api/users/login", userData)
+    .post("/api/teachers/login", userData)
     .then(res => {
       // Save to localStorage
 
@@ -42,6 +46,32 @@ export const loginUser = userData => dispatch => {
     );
 };
 
+// Login - get teacher token
+export const loginStudents = userData => dispatch => {
+  axios
+    .post("/api/students/login", userData)
+    .then(res => {
+      // Save to localStorage
+
+      // Set token to localStorage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {
@@ -49,6 +79,8 @@ export const setCurrentUser = decoded => {
     payload: decoded
   };
 };
+
+
 
 // User loading
 export const setUserLoading = () => {
